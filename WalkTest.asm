@@ -39,13 +39,13 @@
 
 ; パレットテーブル
 PaletteBase:
-	.incbin	"bg-palette.bin"
-	.incbin	"sp-palette.bin"
+	.incbin	"assets/bg-palette.bin"
+	.incbin	"assets/sp-palette.bin"
 
 ; パターンテーブル
 PatternBase:
-	.incbin	"bg-ptn.bin"
-	.incbin	"sprite-ptn.bin"
+	.incbin	"assets/bg-ptn.bin"
+	.incbin	"assets/sprite-ptn.bin"
 
 WalkAnimationTable:
 	.byte $01
@@ -162,7 +162,7 @@ WalkAnimationTable:
 	rti
 .endproc
 
-.include "snippets.asm"
+.include "include/snippets.asm"
 
 ; ================= main procs =================
 

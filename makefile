@@ -1,27 +1,21 @@
-CL65	= ../cc65/bin/cl65.exe
-LD65	= ../cc65/bin/ld65.exe
+ASMSOURCES = WalkTest.asm              \
+             initreg.asm
 
 #-------------------------------------------------------------------------------
-CSOURCES =
-
-ASMSOURCES = WalkTest.asm	\
-		initreg.asm
-
-OBJECTS	=	$(CSOURCES:.c=.o) $(ASMSOURCES:.asm=.o)
-
+CL65	= cl65
+LD65	= ld65
+OBJECTS   = $(addprefix objs/,$(notdir $(ASMSOURCES:.asm=.o)))
 LIBRARIES =
 #-------------------------------------------------------------------------------
+
 all :	$(OBJECTS) $(LIBRARIES)
 	$(LD65) -o WalkTest.smc --config WalkTest.cfg --obj $(OBJECTS)
 
 .SUFFIXES : .asm .o
 
-.c.o :
-	$(CL65) -t none -o $*.o -c -O $*.c
-
-.asm.o :
-	$(CL65) -t none -o $*.o -c $*.asm
+objs/%.o : %.asm
+	$(CL65) -t none -o objs/$*.o -c $*.asm
 
 clean :
-	rm *.smc
-	rm *.o
+	rm -f objs/*.o
+	rm -f *.smc
