@@ -37,12 +37,12 @@
 .import	InitRegs
 .segment "STARTUP"
 
-; ƒpƒŒƒbƒgƒe[ƒuƒ‹
+; ãƒ‘ãƒ¬ãƒƒãƒˆãƒ†ãƒ¼ãƒ–ãƒ«
 PaletteBase:
 	.incbin	"assets/bg-palette.bin"
 	.incbin	"assets/sp-palette.bin"
 
-; ƒpƒ^[ƒ“ƒe[ƒuƒ‹
+; ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ†ãƒ¼ãƒ–ãƒ«
 PatternBase:
 	.incbin	"assets/bg-ptn.bin"
 	.incbin	"assets/sprite-ptn.bin"
@@ -53,7 +53,7 @@ WalkAnimationTable:
 	.byte $03
 	.byte $02
 
-; ƒŠƒZƒbƒgŠ„‚èž‚Ý
+; ãƒªã‚»ãƒƒãƒˆå‰²ã‚Šè¾¼ã¿
 .proc	Reset
 	sei
 	clc
@@ -66,7 +66,7 @@ WalkAnimationTable:
 .i16
 	ldx	#$1fff
 	txs
-	
+
 	jsr	InitRegs
 
 	; BG configuration
@@ -213,7 +213,7 @@ mainloop_start:
 	lsr
 	tax
 	jsr scrollBG2
-	
+
 	plx
 	pla
 	rts
@@ -367,7 +367,7 @@ mainloop_start:
 
 
 	sep	#$20
-.a8    
+.a8
 
 	; Wait Joypad
 	padwait:
@@ -602,7 +602,7 @@ copyptn:
 
 	sep	#$20
 .a8
-	
+
 
 	stz $2104 ; x
 	lda #$e0
@@ -674,7 +674,7 @@ copyptn:
 	asl ; Select sprite (start = x*2 words)
 	sta $2102
 	stz $2103
-	
+
 	lda #$00
 	sta $2104 ; x = 0
 
@@ -822,7 +822,7 @@ copyptn:
 	stz $4200
 
 	rep	#$20
-.a16	
+.a16
 
 	rts
 .endproc
@@ -842,7 +842,7 @@ copyptn:
 	sta $4200
 
 	rep	#$20
-.a16	
+.a16
 
 	pla
 	rts
@@ -861,7 +861,7 @@ copyptn:
 	stz gWalkAnimationCount
 
 	rep	#$20
-.a16	
+.a16
 
 	lda #$20
 	sta gPlayerX
@@ -1027,7 +1027,7 @@ copyptn:
 	lda kPlayerSpriteIndex1 ; A=Sprite Index
 	jsr changeSpriteTile
 
-	
+
 	; Bottom sprite
 	clc
 	lda gPlayerTileBase
@@ -1107,7 +1107,7 @@ copyptn:
 	stz $2104
 
 	rep	#$20
-.a16	
+.a16
 
 	ply
 	plx
@@ -1655,7 +1655,7 @@ copyptn:
 	lsr
 	eor gRandomReg
 	sta gRandomReg
-	
+
 	tya
 	and #$0008
 	lsr
@@ -1710,7 +1710,7 @@ copyptn:
 	lda gRandomReg
 	and #$1f
 	sta gSpritePosTemp
-	
+
 	txa
 	clc
 	adc gSpritePosTemp
@@ -1726,7 +1726,7 @@ copyptn:
 	rti
 .endproc
 
-; ƒJ[ƒgƒŠƒbƒWî•ñ
+; ã‚«ãƒ¼ãƒˆãƒªãƒƒã‚¸æƒ…å ±
 .segment "CARTINFO"
 	.byte	"WALKTEST             "	; Game Title
 	.byte	$00				; 0x01:HiRom, 0x30:FastRom(3.57MHz)
@@ -1743,14 +1743,14 @@ copyptn:
 	.word	EmptyInt	; Native:BRK
 	.word	EmptyInt	; Native:ABORT
 	.word	VBlank		; Native:NMI
-	.word	$0000		; 
+	.word	$0000		;
 	.word	EmptyInt	; Native:IRQ
 
-	.word	$0000	; 
-	.word	$0000	; 
+	.word	$0000	;
+	.word	$0000	;
 
 	.word	EmptyInt	; Emulation:COP
-	.word	EmptyInt	; 
+	.word	EmptyInt	;
 	.word	EmptyInt	; Emulation:ABORT
 	.word	VBlank		; Emulation:NMI
 	.word	Reset		; Emulation:RESET
